@@ -17,7 +17,7 @@ def debugOutput(lines, i, scope):
         print(rl)
 
 
-def getreflections(inp, tolerance=0):
+def getreflections(inp, reflection_errors=0):
     reflections = []
     lines = inp.splitlines()
     for i, l in enumerate(lines):
@@ -28,12 +28,11 @@ def getreflections(inp, tolerance=0):
             errorCount = 0 
             for j in range(scope):
                 errorCount += len([1 for c1, c2 in zip(lines[i-j-1], lines[i+j]) if c1 != c2])
-                if errorCount > tolerance:
+                if errorCount > reflection_errors:
                     break
-            if errorCount == tolerance:
+            if errorCount == reflection_errors:
                  # debugOutput(lines, i, scope)
                  reflections.append(i)
-
     return reflections
 
 
